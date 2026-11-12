@@ -1,0 +1,22 @@
+# Kişisel veri ve gizli bilgiler: ASLA depoya girmez
+docs/PROFIL.local.md
+CLAUDE.local.md
+*.gungun
+.env
+.env.*
+
+# Bağımlılıklar ve çıktılar
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+.vite/
+*.log
+.DS_Store
+Thumbs.db
+
+# Editör
+.idea/
+.vscode/*
+!.vscode/extensions.json
