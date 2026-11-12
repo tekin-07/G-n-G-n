@@ -1,6 +1,8 @@
 # 09 - Kaynaklar ve Araştırma Notları (31 Ekim 2026)
 
-Bu liste kararların dayanağıdır. Üçüncü taraf blog/özet sayfaları ikincil kaynaktır; kurulum sırasında resmî dokümanla doğrulanır.
+12 Kasım 2026 notu: Aşağıdaki bağlantılar önceki araştırma arşividir; bu planlama güncellemesinde internet araştırması veya sürüm doğrulaması yapılmadı. Başlıklardaki tarih/majör sürüm/uyumluluk iddiaları kesin güncel gerçek olarak kullanılmaz. Platform kararı PRD O1 ve ARCHITECTURE bölüm 7'ye göre yeniden değerlendirilecek; güncel resmî Android/Capacitor/TypeScript/Vite belgeleri ve gerçek cihaz kanıtı kuruluma başlamadan kayda alınacak.
+
+Bu liste önceki kararların dayanağıdır. Üçüncü taraf blog/özet sayfaları ikincil kaynaktır; kurulum sırasında resmî dokümanla doğrulanır.
 
 ## Tasarım ve "AI slop"
 - Neden yapay zekâ tasarımı jenerik görünür (mor gradient, Inter, üç kart): https://www.superdesign.dev/blog/why-ai-design-looks-generic

@@ -1,97 +1,62 @@
-# 02 - Ekranlar ve Kullanıcı Akışları (Gün Gün)
+# 02 - Ekranlar ve Akışlar
 
-Görsel kurallar 03-DESIGN.md'dedir. Metinler örnektir; nihai metinler `i18n/tr.ts` içinde tutulur, cümle düzeniyle (ilk harf büyük, ünlemsiz) yazılır. Ekranlar mobil öncelikli, 360-412 dp genişliğe göre tasarlanır.
+12 Kasım 2026 planlama güncellemesi. Görsel kaynak 03-DESIGN.md; kapsam 01-PRD.md. Arayüz örnekleri ürün tasarımıdır, çalışan ekran değildir. Mobil 360–412 dp; metinler i18n/tr.ts.
 
-## 1. Gezinme
+## 1. Gezinme ve ortak davranış
+Alt çubuk: Bugün, Plan, Hedefler, Para, Daha fazla; ikon + yazı. Hash rotaları #/bugun, #/plan, #/hedefler, #/para, #/daha-fazla korunur. “Ekle” ortak eylemi hızlı kayıt/görev, etkinlik, gider, gelir ve hedef eklemeye erişir; tek satırlık hızlı kayıt en az alanla açılır. Para'da gider kısayolu kolay erişilir. Kesin yerleşim maketle değerlendirilir.
+Formlar alt sayfa/tam sayfa, geri tuşu bir adım geri; dolu formu terk ederken taslağı koruma veya vazgeçme onayı. Tek dokunuş tamamlar; not/süre isteğe bağlı. Bir kaydın farklı ekranları aynı kaydı kullanır. Bildirim eylemi de aynı iş kuralını çağırır.
 
-Alt çubuk, 5 sekme (ikon + metin, ikonlar tek başına kullanılmaz): Bugün, Plan, Hedefler, Para, Daha fazla.
-Sağ altta yüzen "Ekle" düğmesi yalnızca Bugün, Plan ve Para'da görünür; açılan alt sayfa: Gider ekle, Gelir ekle, Etkinlik ekle, Hedefe not.
-Tüm düzenleme ve ekleme formları alt sayfa (bottom sheet) veya tam ekran sayfa olarak açılır; geri tuşu bir adım geri gider; yarım form için "Vazgeç?" onayı.
-Rotalar (hash): `#/bugun`, `#/plan`, `#/hedefler`, `#/para`, `#/daha-fazla`, alt rotalar özellik klasöründe tanımlanır.
+## 2. Ekranlar
 
-## 2. Ekran listesi
-
-### 2.1 Karşılama (onboarding)
-6 adım (PRD F1). Üstte adım çubuğu (adım sayısı yazı ile: "3 / 6"). Her adımda tek karar grubu. Varsayılanlar dolu, "Devam" büyük düğme, "Atla" ikincil. Son adım özet kartları ve "Bugün'e git".
-Boş durum: yok. Hata: geçersiz saat/tutar satır altında açıklanır.
+### 2.1 Karşılama
+Kısa veri/gizlilik açıklaması → temel müsait zamanlar → ilk iş veya Bugün. Ayrıntılar atlanabilir ve taslak kalır. İlk Para kullanımında hesap/varlık, ilk hatırlatmada neden izin gerektiği açıklanır. Altı uzun adımı bitirmeden kullanım engellenmez. Finans/saat eksikleri tamamlanmış gibi gösterilmez.
 
 ### 2.2 Bugün
-Yukarıdan aşağıya:
-1. Başlık satırı: "Cumartesi, 31 Ekim" + sağda seri göstergesi (halka içinde sayı).
-2. Mini motivasyon: tek cümle, en fazla günde bir (03-DESIGN.md banka).
-3. "Şimdi / Sıradaki" büyük kart: aktif veya sıradaki blok (ad, saat aralığı, kalan süre), tek ana düğme ("Yaptım" veya "Başladım"), ikincil "Ertele".
-4. Bugünün zaman çizgisi: dikey, saat etiketli; geçmiş bloklar soluk, "şimdi" çizgisi belirgin; blok = kategori rengi şeridi + ad + saat; dokununca ayrıntı sayfası (Yaptım, Atla, Ertele, Not, Düzenle).
-5. Kontrol kartları (zamanı gelince): ek iş sorusu (15:00 hafta içi, 12:00 hafta sonu): "Bugün için gerekenleri yaptın mı?" [Evet] [Hayır]; hedef notu kartı (21:30): "Hedefler için bugün ne yaptın?" -> alt sayfa: aktif hedefler listesi, her birinde tek satırlık not alanı, [Kaydet]; oğul notu: öğle arası/hafta sonu bloğu bitince "Bugün neler yaptınız?" (isteğe bağlı).
-6. Para özeti (tek satır, dokununca Para'ya): "Toplam birikim 12.480 TL, bu ay beklenen gider 18.300 TL" (rakamlar örnek).
-7. Uyarı kartları (en fazla 3, öncelik sırasıyla): kart son ödeme (3 gün kala), sabit gider vadesi (3 gün kala), birikim kartı (maaş günü), kur eski (7 gün), yedek zamanı.
-8. Altta tek bağlantı: "Bugün plansız geçti" (ikincil metin düğmesi). Joker kalmadıysa yanında sakin bir not.
+Başlık ve tarih, gerekirse tek kısa motivasyon cümlesi. Altında üç sakin liste:
+1. **Zamanı belli:** kesinleşmiş randevu ve ders; saatli zaman çizgisi burada, yalnız kesin saatler için. Hazırlık görevi ve ulaşım payı görünür.
+2. **Uygun olduğunda:** mesai içinde ek iş, seçilen gündeki esnek dil/okuma/fitness. Yapay başlangıç saati/kalan dakika sayacı yok. Pencere devam ederken “gecikti” yazılmaz.
+3. **Dikkat gerekiyor:** yaklaşan/geçmiş fatura, kesinleştirilecek görüşme, bildirim izni veya yedek ihtiyacı. En fazla üç özet satırı + kalan sayısı/Tümünü gör; ciddi eksikler kaybolmaz.
+Tamamlananlar katlanabilir listede; tek satırlık para özetinden Para'ya geçilir. Seri ve başarı yüzdesi başlıkta zorunlu değildir. “Bugün yetişmeyecek” ilgili işin menüsünde; bütün günü başarısız ilan eden düğme yok.
 
-Boş gün: "Bugün için planlı bir şey yok. İstersen bir etkinlik ekle." Çevrimdışı: göstergesi yok (uygulama hep çevrimdışıdır).
+### 2.3 Plan ve haftalık gözden geçirme
+Gün/Hafta/Ay; hafta telefonda dikey gün listesi, ayda kısa işaretler. Saatli randevular, esnek kapasite ve kesinleşmemiş tercihler ayrı etiket taşır. Cumartesi ve Salı/Perşembe aile görüşmesi tercihleri onaylanana kadar “Kesinleşmedi”; öğle görüşmesi üretilmez.
+Haftayı planla: (1) görüşme/dersleri kesinleştir, (2) aktif hedefleri seç, (3) esnek işleri günlere dağıt, (4) boşluk/dinlenme ve kapasiteyi gözden geçir, (5) değişiklik özetini onayla. Otomatik öneri önizlemedir; sessiz takvim değişikliği yok. Her adımda taslak saklanır. Bilinmeyen süreler kapasite hesaplandı gibi gösterilmez.
 
-### 2.3 Plan
-Üstte görünüm anahtarı: Gün | Hafta | Ay. Hafta şeridi (Pzt-Paz, bugün vurgulu, oğul günü küçük etiket). 
-- Gün: Bugün zaman çizgisinin aynısı, seçilen tarih için.
-- Hafta: 7 sütun yerine dikey gün listesi (telefonda yatay sütun okunmaz): her gün altında blokların kısa satırları; çakışma işareti.
-- Ay: ay ızgarası, günlerde en fazla 3 nokta (kategori renginde); güne dokununca gün görünümü.
-Üstte "Bu hafta oğul günü: Cumartesi [Değiştir]". Haftalık oğlunla toplam saat bilgisi.
-Çakışma: satırda "Çakışıyor" etiketi; dokununca sayfa: iki blok ve öneriler ("Spor'u Perşembe 20:00'ye kaydır"), [Uygula] [Böyle kalsın].
-Filtre: kategori çipleri.
+### 2.4 Aktivite ve etkinlik
+Başlık; Görev/Etkinlik; hedef bağlantısı isteğe bağlı. Zaman: saatli, gün/pencere içinde esnek veya henüz tarihsiz. Tekrar: hafta günleri, her N günde bir, haftada N oturum; başlangıç/isteğe bağlı bitiş. Fitness'ta başlangıç tarihi üzerinden 2 günlük aralık önizlemesi, haftalık sabit gün zorlaması yok.
+Sinema/tiyatro/gezi: yer, tahmini harcama, hazırlık/ulaşım hatırlatması isteğe bağlı. “Bilet al” gibi bağlı görev eklenebilir. Gerçek harcama eklerken tarih/açıklama/tahmin önceden dolu gelir; kullanıcı onaylar. Dış uygulamadaki fitness/dil programını tekrar girmek gerekmez; otomatik bağlantı/senkronizasyon vaat edilmez.
 
-### 2.4 Etkinlik ekle/düzenle
-Üstte iki sekme: Düzenli | Günübirlik.
-- Düzenli: ad, kategori, günler (Pzt..Paz çipleri), saat veya "Esnek", süre, başlangıç tarihi, bitiş (isteğe bağlı), haftalık hedef, hatırlatma. Alt kısım: "Çakışma kontrolü" canlı sonuç.
-- Günübirlik: ad, kategori, tarih, saat, yer, tahmini harcama (isteğe bağlı).
-Kaydedince Plan'a döner, yeni blok kısaca vurgulanır.
+### 2.5 Hızlı kayıt ve Yapmak istediklerim
+Tek başlıkla kaydet; kategori/tarih zorunlu değil. Plan ve Hedefler'den erişilen tarihsiz liste; haftalık gözden geçirmede hatırlanır, bildirim yağmuru veya gecikme sayacı yok. “Göreve dönüştür / Etkinlik planla / Hedef yap” var olan yakalama kaydını hedef kayda bağlar; iki bağımsız iş üretmez. Hazırlık görevi tamamlanmadan etkinlik için yanlış hazır bilgisi verilmez.
 
-### 2.5 Hedefler
-Liste: kategoriye göre gruplu kartlar (hedef adı, kategori çipi, son not tarihi, hedef tarihi varsa kalan gün). Üstte "Bugünün notları" bağlantısı (21:30 kartının aynısı). Boş durum: "Henüz hedef yok. Mesela bir tatil, ev ya da İngilizce hedefi ekleyebilirsin." [Hedef ekle].
-Hedef detayı: başlık, neden (isteğe bağlı), durum, günlük zaman çizgisi (tarih + not), [Not ekle], düzenle/duraklat/tamamla.
-Hedef ekle: ad, kategori (yeni kategori ekleme dahil), tür (Yaşam hedefi | Maddi hedef [v1]), hedef tarihi.
-Kategori yönetimi: Daha fazla > Kategoriler.
+### 2.6 Toparlama ve erteleme
+İş menüsü: Başka güne taşı / Bu haftadan çıkar / Duraklat. Kaydırma öncesi etkilenen randevu ve hatırlatmalar gösterilir. “Yalnız bu sefer” ile “Tekrar düzenini değiştir” açık ayrılır. Fitness döngüsünü kaydırma politikası PRD O2 kararıdır; önizleme ve onay olmadan sonraki oturumlar değişmez. Erteleme hedefte ikinci tamamlanma yaratmaz, eski bildirimi iptal eder. İptal/atlama ile finansal vade erteleme birbirine karıştırılmaz.
 
-### 2.6 Para
-Üstte segment: Özet | İşlemler | Hesaplar | Kartlar | Sabit.
-- Özet: büyük rakam "Toplam birikim" (+ "kart borcunu düş" anahtarı); altında bu ay: gelir, gider, beklenen; yaklaşan ödemeler listesi (sabit gider vadeleri, kart son ödeme, taksit); birikim kartı.
-- İşlemler: ay seçici, arama, kategori çipleri; liste (kategori ikonu rengi, ad/not, hesap/kart, tutar sağda; gelir pozitif renkle ama renk tek başına bilgi taşımaz: "+" ve "-" işaretleri). Satır kaydırma: sola kaydır sil (geri al çubuğu).
-- Hesaplar: kartlar (ad, tür, bakiye, TL karşılığı); [Hesap ekle], [Aktarım/dönüşüm]; kur kartı ("1 USDT = 41,35 TL, 2 gün önce" [Güncelle]); hesap detayı: işlem listesi.
-- Kartlar: kart listesi (limit, kesim, son ödeme, güncel ekstre, kart borcu), [Taksitlerim], [Kart ekle]. Kart detayı: ekstre ayı seçici, kalemler (tek çekim + taksit), [Ekstreyi ödedim].
-- Sabit: gelir kaynakları ve sabit giderler iki bölüm; vade günü, tutar, durum (bekliyor/ödendi), [Ödedim]; [Ekle].
+### 2.7 Hedefler
+Aktif / Daha sonra / Duraklatılmış / Tamamlandı. Hedef detayında sonuç/isteğe bağlı tarih, sıradaki küçük adımlar, bağlı düzenli aktiviteler ve isteğe bağlı notlar. Aktivite tamamlanınca burada görünür; ikinci onay istemez. Temel oturum sayısı MVP; detaylı öğrenme günlüğü/grafikleri v1. Hedefi duraklatırken bağlı gelecek işler ve bildirimlere etkisi özetlenip onaylanır; geçmiş silinmez.
 
-Gider ekle (hızlı akış, 3 adım): tutar (büyük sayı tuş takımı) -> kategori (en son kullanılan 6 çip + "Tümü") -> [Kaydet]. "Daha fazla ayrıntı" açılırsa: hesap/kart (varsayılan son kullanılan), tarih (bugün), not, fiş fotoğrafı, taksit anahtarı (kart seçiliyse).
-Taksitli alım: tutar (toplam), taksit sayısı çipleri (2,3,6,9,12 + diğer), başlangıç ayı (varsayılan o ekstre), ürün adı, kategori, "peşin fiyat" isteğe bağlı; canlı önizleme: "6 taksit: 5 x 166,66 TL ve son taksit 166,70 TL. Bitiş: Nisan 2027".
-Gelir ekle: tutar, kaynak (maaş/ek gelir/diğer + yeni), hesap, tarih, not.
-Aktarım/dönüşüm: kaynak hesap + tutar, hedef hesap + tutar, örtük kur gösterilir, "Kuru güncelle" önerisi.
+### 2.8 Para
+Özet / İşlemler / Hesaplar / Kartlar / Faturalar ve düzenli gelirler.
+- Özet: bu ay gelir/gider, kategori dağılımı (sade liste), birikim planlanan/gerçekleşen, yaklaşan ödemeler ve maaşa kadar yük. Tahmini kullanılabilir para yanında dönem, seçili hesaplar ve eksik bilgiler. Tutar bilinmeyen faturalar görünür; sıfır gibi hesaplanmaz.
+- Hesaplar: banka/nakit TRY, USDT, altın; bakiye, TL karşılığı, kur tarihi, transfer/dönüşüm. Likit bütçe ile toplam varlık ayrılır.
+- İşlemler: ay, arama, kategori; hızlı gider tutar → kategori → kaydet; hesap/tarih geçerli varsayılanı varsa doldurulur, yoksa sorulur. Not/fiş/taksit ayrıntıları genişletilir. Silme 8 sn geri al.
+- Faturalar: dönem, sağlayıcı/kategori, bilinmeyen/tahmini/kesin tutar, vade bilinmiyor/var, bekleyen/kısmi/ödendi, otomatik ödeme talimatı ayrı etiket. “Ödedim” ödeme hesabı/tutar/tarih doğrulanarak tek kayıt yaratır. Bildirimden gerekli alanlar eksikse bu form açılır. Kısmi ödemede kalan görünür; tahmini tutarlı dönem kesinleşmeden tam ödendi sayılmaz.
+- Kartlar: limit, ekstre, borç, son ödeme, Taksitlerim; yansıyan taksit ve yapılan ödeme farklı etiket. Kısmi ödeme/iade/düzeltme akışı PRD O4 kararından sonra tamamlanır.
 
-### 2.7 Taksitlerim
-Üstte iki sayı: "Taksit ödenen ürün: 3" ve "Bu ay taksit toplamı: X TL". Altında ürün kartları: ad, kart, ilerleme çubuğu "3/6", kalan tutar, bitiş ayı. En altta "Önümüzdeki 12 ay": ay başına çubuk (v1 grafik; MVP'de liste) ve en yüksek ay etiketi. Ürüne dokununca detay: tüm taksitler (ay, tutar, durum: ekstreye yansıdı/bekliyor), düzenle/sil (silinirse yalnızca bekleyenler).
+### 2.9 Birikim ve Taksitlerim
+Birikim: hedef tutar, ayrılacak ve gerçekten aktarılan ayrı; “Sonra aktarırım” geçmişi değiştirmez. Transfer iki hesap/tutarla, taslak önizleme sonrası oluşur. Taksitler: ürün, ilerleme (ekstreye yansıyan), kalan, bitiş, gelecek 12 ay; son kuruş farkı önizlenir. Örnek 1.000 TL/6 = 5×166,66 + 166,70. Bekleyen satır değişikliği ile posted satır ayrılır.
 
-### 2.8 Birikim kartı
-Maaş gününden itibaren 3 gün Bugün'de ve Para > Özet'te: "Bu ay biriktireceğin tutar: 5.000 TL" (ayarlardaki sabit tutar; örnek) [Biriktirdim] [Tutarı değiştir] [Sonra]. [Biriktirdim] -> hangi hesaba aktarıldığı (varsayılan son kullanılan) -> transfer oluşur.
+### 2.10 Hatırlatma ayarları ve eylemleri
+Kategori bazında açık/kapalı, uygun zaman aralığı, sessiz saatler, tekrar tercihi, kilit ekranı ayrıntısı. İzin/Android kısıtı durumu ve açıklayıcı çözüm yolu; izin reddi kullanımın geri kalanını engellemez. Örnek hatırlatma cihaz denemesi. Tamamla/sonra hatırlat/bugün olmayacak; ödeme tamamlamada doğrulama gerekir. Tamamlanan/taşınan/silinen kayıtların eski bildirimleri geçersizleşir. Tekrarlanan bildirime basış çift veri üretmez.
 
-### 2.9 Daha fazla
-Liste: İstatistik (v1), Anılar (oğul notları), Kategoriler, Yedekle ve geri yükle, Takvime aktar, Ayarlar, Hakkında.
+### 2.11 Yedek ve depolama
+Son yedek, kullanım/kalıcılık; yedek al: parola iki kez, güç göstergesi, fiş dahil/hariç, paylaş/indir. Geri yükle: dosya → parola → doğrulama → özet → şifreli kurtarma yedeği önerisi → üzerine yazma açık onayı. Yanlış parola/bozuk dosya mevcut veriyi değiştirmez. Birleştirme hazır seçenek değildir (PRD O5). Yedek unutulursa verinin kurtarılamayabileceği kısa açıklanır.
 
-### 2.10 İstatistik (v1)
-Üstte Gün | Hafta sonu | Ay. Sayılar önce, grafik ikincil; her grafiğin altında okunur özet cümle ("Bu ay 9 gün spor yaptın"). Para bölümü: gelir/gider, kategori dağılımı, birikim, net değer çizgisi.
+### 2.12 Daha fazla ve sonraki ekranlar
+Anılar, kategoriler, yedek, .ics, bildirimler, ayarlar, hakkında; v1'de ayrıntılı istatistik/bütçe/maddi hedef/kilit. Ayarlar: müsait zaman, tema, tekrar, izinler, depolama, sürüm, yalnız geliştirmede uydurma demo verisi, tüm veriyi sil (yedek önerisi + çift onay).
 
-### 2.11 Yedekle ve geri yükle
-Son yedek tarihi büyük; [Yedek al] -> parola iki kez + güç göstergesi + "Fişleri de ekle" anahtarı + boyut -> paylaş menüsü. Bölüm "Geri yükle": dosya seç -> parola -> özet (tablo satır sayıları, yedek tarihi) -> [Üzerine yaz] / [Birleştir] / [Vazgeç]. Sabit uyarı: "Parolayı unutursan yedek açılamaz."
+## 3. Kritik akışlar
+A1 kısa karşılama ve ilk esnek iş; A2 ek işin farklı mesai saatinde tamamlanması; A3 hızlı gider ve aylık kategori dağılımı; A4 kart/taksit; A5 maaş ve birikim planı/transfer ayrımı; A6 toparlama, otomatik yarına yığmama; A7 yedek gidiş-dönüş; A8 kesin saatli ders çakışması; A9 çevrimdışı; A10 tercih görüşmenin birden çok kesin randevuya dönüşmesi. Ek senaryolar B1–B10, 07-TEST-PLAN.md'de.
 
-### 2.12 Ayarlar
-Tema, plan kuralları (saatler, spor günleri/saati, ek iş, oğul varsayılanı), joker sayısı, birikim tutarı, uyarı gün sayıları, depolama (kalıcı depolama durumu + kullanım), sürüm, "Örnek veri yükle" (yalnızca geliştirme/demo; uydurma), "Tüm veriyi sil" (çift onay + yedek önerisi).
-
-## 3. Kritik akışlar (kabul testlerine dönüşür)
-
-A1. İlk açılış -> karşılama -> Bugün ekranında haftanın planı hazır.
-A2. Hafta içi 15:00 -> ek iş kartı -> Evet -> kart kaybolur, gün özetinde "ek iş yapıldı".
-A3. Gider ekleme: Bugün > Ekle > Gider > 125 yaz > Market > Kaydet (<= 4 dokunuş), liste ve özet güncellenir.
-A4. Taksitli buzdolabı: 12.999 TL, 6 taksit, kart, Kasım başlangıç -> önizleme -> Kaydet -> Taksitlerim'de 1 ürün, bu ayki toplam doğru.
-A5. Maaş günü: açılışta maaş kaydı oluşmuş, birikim kartı görünür; [Biriktirdim] -> transfer.
-A6. Plansız gün: düğme -> joker kullanıldı, seri korunur; aynı hafta ikinci kez -> sakin açıklama, seri sıfırlanır.
-A7. Yedek al -> uygulamayı sil/yeniden kur -> yedek yükle -> tüm veri geri gelir.
-A8. Aralık'ta boks eklenir (haftada 1 gün, 1 saat) -> spor günüyle çakışırsa öneri çıkar.
-A9. Çevrimdışı (uçak modu): tüm yukarıdakiler çalışır.
-A10. Oğul günü Pazar'a çevrilir -> hafta planı yeniden dağılır, Cumartesi serbest.
-
-## 4. Durumlar (her ekran için zorunlu)
-Yükleniyor (iskelet, 300 ms'den kısa sürede gösterme), boş (davet + eylem), hata (ne oldu + ne yapılır), başarı (kısa onay, uzun kutlama yok), geri al (silmede 8 sn).
+## 4. Her ekranın durumları
+Yükleniyor (300 ms altı iskelet göstermeme), boş (davet/eylem), hata (neden/çözüm), kısa başarı, geri al; kısmi bilgi/taslak ve izin reddi. Çevrimdışı normal çalışma durumudur. Yeni sürüm veya geri yükleme yarım formu kaybettirmez.

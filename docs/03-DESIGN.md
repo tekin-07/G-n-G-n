@@ -14,7 +14,7 @@ Referans uygulamalardan alınan dersler:
 
 ## 2. Tasarım yönü (tek paragraf)
 
-"Sabah ışığı, sakin kırtasiye": serin beyaz bir zemin üstünde turkuaz ana renk, şeftali yalnızca küçük sıcak vurgu; bol boşluk, ince çizgiler, az gölge. Hiçbir ekran bir "panel" gibi görünmez; bir planlayıcı defteri gibi okunur. Hatırlanır tek unsur: günün zaman çizgisi ve gün kapanınca dolan ince halka. Geri kalan her şey sessizdir.
+"Sabah ışığı, sakin kırtasiye": serin beyaz bir zemin üstünde turkuaz ana renk, şeftali yalnızca küçük sıcak vurgu; bol boşluk, ince çizgiler, az gölge. Hiçbir ekran bir "panel" gibi görünmez; bir planlayıcı defteri gibi okunur. Görsel imza, kesin saatli olayların sade zaman çizgisi ve sakin listelerdir. Bugün ekranı Zamanı belli / Uygun olduğunda / Dikkat gerekiyor olarak düzenlenir; bunlar eşit üç kart değildir. Seri halkası zorunlu veya baskın öğe değildir.
 
 Neden bu seçimler: kullanıcı ferah, ciddi olmayan, yormayan bir görünüm istedi (turkuaz, şeftali, beyaz, açık mavi). Zemin bilinçli olarak krem değil serin beyazdır; krem + kil/terrakota ikilisi de bugünün "otomatik tasarım" imzalarından biridir.
 
@@ -113,54 +113,43 @@ Her bileşen: 4 durum (normal, odak, basılı, devre dışı), açık/koyu tema,
 ## 8. Hareket
 
 - Yalnızca eyleme yanıt: onay işareti dolması 150 ms, alt sayfa 220 ms ease-out, silme çubuğu 120 ms.
-- Tek "anılacak an": gün tamamlanınca Bugün'deki ince halka dolar ve kısaca sessizce durur (ses/konfeti yok).
+- Tamamlama küçük bir durum değişikliğiyle anlatılır; günü başarı yüzdesi/seriyle yargılayan zorunlu halka, ses veya konfeti yok. İsteğe bağlı göstergeler ayrıca tasarlanır.
 - `prefers-reduced-motion: reduce` ise tüm hareket anlık geçişe döner.
 
 ## 9. Ekran düzeni taslakları
+12 Kasım 2026 güncellemesi; ayrıntılı davranış 02-SCREENS.md. Bunlar düşük ayrıntılı içerik örnekleridir, kullanıcı verisi değildir.
 
 Bugün:
 ```
-[Cumartesi, 31 Ekim            (seri: 4)]
-Bugün spor günü, 35 dakika yeter.
+[Tarih]                                    [Hızlı ekle]
+Zamanı belli
+  19:00 Ders                 [Hazırlık görevini gör]
+Uygun olduğunda
+  Mesai içinde: ek iş        [Tamamla]
+  Kitap okuma               [Tamamla]
+Dikkat gerekiyor
+  Fatura: vade yaklaşıyor    [İncele]
+  Görüşme günü kesinleşmedi  [Planla]
+[Tamamlananlar] [Haftayı gözden geçir]
+[Bugün] [Plan] [Hedefler] [Para] [Daha fazla]
+```
+Saat kesin değilse çizelgede sahte blok/sayaç yaratma. Bilgi yoğunluğu listeler ve kademeli ayrıntıyla yönetilir. Kesinleşmemiş, bilinmeyen ve tamamlanmış durumlar yalnız renkle anlatılmaz.
 
-+----------------------------------------+
-| Şimdi                         10:30-12:30 |
-| Ek iş                                    |
-| Kalan 1 sa 20 dk                         |
-| [ Yaptım ]            [ Ertele ]         |
-+----------------------------------------+
-
- 08:00  Uyanış
- 09:30  | Ek iş (2 sa)        <- şimdi çizgisi
- 11:00  | Spor (35 dk)
- 13:00  | Oğlunla zaman (5 sa)
- ...
-Toplam birikim 12.480 TL  >
-[ Kart son ödeme: 3 gün ]      (uyarı kartı)
-                 Bugün plansız geçti
-[Bugün][Plan][Hedefler][Para][Daha fazla]            ( + Ekle )
-```
-Para > Özet:
-```
-Toplam birikim
-12.480,00 TL           [x] Kart borcunu düş
-Bu ay   Gelir 50.000   Gider 31.200   Beklenen 18.300   (uydurma örnek rakamlar)
-Yaklaşan ödemeler: Kira - 1 Kas - 15.000 TL ...
-```
+Para özeti: bu ay gelir/gider → kategori dağılımı → birikim planı/gerçek transfer → yaklaşan ödemeler. Tahmini kullanılabilir tutarın yanında dönem/hesaplar/eksik fatura bilgisi; bilinmeyen tutar sıfır yazılmaz. Boş alan gelecekteki grafiklerle doldurulmaz.
 
 ## 10. Metin ve ton
 
 Genel: kısa, sade fiil, ilk harf büyük, ünlem yok, "Harika/Tebrikler" yok. Düğme ne olacağını söyler ("Kaydet", "Yedek al", "Ödedim"); aynı eylemin adı akış boyunca aynı kalır ("Kaydet" -> "Kaydedildi").
 Hata: neyin ters gittiği + ne yapılacağı, özür yok. Örnek: "Tutar sıfırdan büyük olmalı."
 Boş ekran davettir: "Henüz hedef yok. Mesela bir tatil ya da İngilizce hedefi ekleyebilirsin."
-Plansız/kaçırılan gün: "Plansız gün de olur. Yarın yeniden başlarız." Asla "başaramadın", "seriyi bozdun".
+Plansız/kaçırılan iş: "Plan değişebilir. Bu işi başka güne alabilirsin." Asla "başaramadın", "seriyi bozdun". Otomatik yarına yükleme veya süre/not/puan zorunluluğu yok.
 Mini motivasyon kuralları: günde en fazla bir cümle, duruma bağlı (spor günü, hafta sonu, maaş günü, seri...), tekrarlamayan döngü, ton sakin ve samimi, abartı ve ünlem yok.
 Örnek banka (30 satırdan fazlası yazılabilir; `i18n/tr.ts` içinde kategori etiketli):
 - Genel: "Bugün küçük bir adım yeter." / "Planın hazır, sen sadece başla." / "Bugünün en önemli işi belli."
 - Spor günü: "Bugün spor günü, 35 dakika yeter." / "Isınmak bile bir başlangıç."
-- Hafta sonu: "Hafta sonu sabahı, acele yok." / "Öğleden sonra oğlunla zaman var."
+- Hafta sonu: "Hafta sonu sabahı, acele yok." / "Planında kendine de yer var."
 - Maaş günü: "Maaş günü. Birikim için güzel bir gün."
-- Seri: "Dört gündür düzenlisin." (yalnızca 3, 7, 14, 30 gün gibi eşiklerde)
+- Tamamlama: "Bugün bir adım attın." (gerçek kayıt varsa; zorunlu başarı eşiği/seri kıyası yok)
 - Plansız gün sonrası: "Dün plansızdı, bugün yeni bir gün."
 - Akşam: "Gün bitiyor, hedeflerine bir satır yazabilirsin."
 Yasak: karşılaştırma ("%80 başarılısın"), suçlama, korkutma ("hedefinin gerisindesin" gibi ifadeler MVP'de yok).
